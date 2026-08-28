@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Affiliate Go Foto Studio — Studio Foto AI #1 Indonesia</title>
+<style>
+  :root{
+    --ink:#222831;
+    --teal-deep:#393E46;
+    --teal-mid:#948979;
+    --teal-bright:#DFD0B8;
+    --mist:#F3F3F3;
+    --paper:#FCFCFB;
+    --gold:#FFD400;
+    --coral:#948979;
+    --font-display: 'Fraunces', 'Georgia', serif;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--font-body);
+    background:var(--paper);
+    color:var(--ink);
+    font-weight:500;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,svg{display:block; max-width:100%;}
+  .wrap{max-width:520px; margin:0 auto; position:relative;}
+
+  /* ---------- Sticky top badge bar ---------- */
+  .topbar{
+    background:var(--ink);
+    color:var(--mist);
+    text-align:center;
+    font-size:12px;
+    letter-spacing:.04em;
+    padding:8px 12px;
+    font-weight:600;
+  }
+  .topbar span{color:var(--gold);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:linear-gradient(165deg, var(--teal-deep) 0%, var(--teal-mid) 55%, var(--teal-bright) 100%);
+    color:#fff;
+    padding:38px 24px 46px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; right:-60px; top:-60px;
+    width:220px; height:220px; border-radius:50%;
+    background:radial-gradient(circle, rgba(255,255,255,.14), transparent 70%);
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:6px;
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.35);
+    padding:6px 12px; border-radius:99px;
+    font-size:12px; font-weight:600; letter-spacing:.03em;
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:var(--font-display);
+    font-size:clamp(28px,8vw,36px);
+    line-height:1.12;
+    font-weight:800;
+    letter-spacing:-.01em;
+    margin-bottom:14px;
+  }
+  h1 em{ font-style:normal; color:#FF8A00; }
+  .hero p.sub{
+    font-size:15.5px;
+    line-height:1.55;
+    color:rgba(255,255,255,.88);
+    max-width:44ch;
+    margin-bottom:22px;
+  }
+  .tagline{
+    font-size:13px;
+    color:rgba(255,255,255,.75);
+    letter-spacing:.02em;
+    margin-bottom:26px;
+  }
+
+  .price-card{
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.28);
+    backdrop-filter:blur(6px);
+    border-radius:18px;
+    padding:18px 20px;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    margin-bottom:20px;
+  }
+  .price-old{
+    font-size:13px; color:rgba(255,255,255,.65);
+    text-decoration:line-through; display:block;
+  }
+  .price-new{
+    font-family:var(--font-display);
+    font-size:26px; font-weight:600; color:#FF8A00;
+    line-height:1.1;
+  }
+  .price-tag{
+    font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+    color:rgba(255,255,255,.7);
+  }
+  .badge-off{
+    background:var(--coral);
+    color:#fff; font-weight:700; font-size:13px;
+    padding:8px 12px; border-radius:10px; white-space:nowrap;
+  }
+
+  .cta-btn{
+    display:block; width:100%; text-align:center;
+    background:linear-gradient(135deg, #FF8A00, #E4002B);
+    color:#fff;
+    font-weight:800; font-size:16px;
+    padding:17px 20px; border-radius:14px;
+    text-decoration:none;
+    box-shadow:0 10px 24px -8px rgba(0,0,0,.45);
+    letter-spacing:.01em;
+  }
+  .cta-btn.small{
+    padding:13px; font-size:14.5px; border-radius:12px;
+  }
+  .cta-note{
+    text-align:center; font-size:11.5px;
+    color:rgba(255,255,255,.7); margin-top:10px;
+  }
+
+  /* ---------- Section shell ---------- */
+  section{ padding:44px 24px; }
+  .section-mist{ background:var(--mist); }
+  .kicker{
+    font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--teal-mid); margin-bottom:10px;
+  }
+  h2{
+    font-family:var(--font-display);
+    font-size:24px; line-height:1.25; font-weight:800;
+    color:var(--ink); margin-bottom:16px;
+  }
+  p.lede{ font-size:14.5px; line-height:1.6; color:#3a4a4e; margin-bottom:8px; }
+
+  /* ---------- Pain points ---------- */
+  .pain-list{ margin-top:20px; display:flex; flex-direction:column; gap:12px; }
+  .pain-item{
+    display:flex; gap:12px; align-items:flex-start;
+    background:#fff; border:1px solid #e7e2da;
+    border-left:3px solid var(--coral);
+    padding:14px 16px; border-radius:10px;
+    font-size:14px; line-height:1.5; color:#3a3a3a;
+  }
+  .pain-item .x{ color:var(--coral); font-weight:800; flex-shrink:0; }
+
+  /* ---------- Stat strip ---------- */
+  .stats{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:10px;
+    margin:26px 0 6px;
+  }
+  .stat{
+    background:#fff; border:1px solid #e7e2da; border-radius:12px;
+    padding:16px 8px; text-align:center;
+  }
+  .stat .num{
+    font-family:var(--font-display); font-size:22px; font-weight:700;
+    color:var(--teal-mid);
+  }
+  .stat .lbl{ font-size:11px; color:#6b6b6b; line-height:1.3; margin-top:4px; }
+
+  /* ---------- Feature cards ---------- */
+  .feature{
+    background:#fff; border:3px solid var(--ink); border-radius:20px;
+    padding:20px; margin-bottom:18px;
+    box-shadow:6px 6px 0 var(--ink);
+  }
+  .feature.f1{ background:#FFE4D0; }
+  .feature.f2{ background:#DCE7FB; }
+  .feature.f3{ background:#FDF2C9; }
+  .feature .ftag{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:11px; font-weight:800; letter-spacing:.04em; text-transform:uppercase;
+    background:var(--ink); color:#fff;
+    padding:5px 12px; border-radius:99px; margin-bottom:10px;
+  }
+  .feature h3{
+    font-family:var(--font-display); font-size:18px; font-weight:800;
+    margin-bottom:6px; color:var(--ink);
+  }
+  .feature .sub-items{
+    font-size:12px; color:#8a5a1e; font-weight:800; letter-spacing:.02em;
+    margin-bottom:10px; text-transform:uppercase;
+  }
+  .feature.f2 .sub-items{ color:#1E3E62; }
+  .feature.f3 .sub-items{ color:#8a6d10; }
+  .feature p{ font-size:13.5px; line-height:1.55; color:#3a3a3a; margin-bottom:14px; }
+  .feature .result{
+    display:block; text-align:center;
+    font-size:13px; font-weight:800; color:#fff;
+    background:linear-gradient(135deg, #FF8A00, #E4002B);
+    border:2px solid var(--ink); border-radius:12px;
+    padding:11px 14px;
+  }
+  .feature.f2 .result{ background:#1E3E62; }
+  .feature.f3 .result{ background:#F2B705; color:var(--ink); }
+
+  .new-banner{
+    background:var(--ink); color:#fff; border-radius:14px; border:3px solid var(--ink);
+    padding:16px 18px; margin-bottom:16px; text-align:center;
+    font-size:13px; font-weight:600; line-height:1.5;
+    box-shadow:6px 6px 0 rgba(0,0,0,.15);
+  }
+  .new-banner b{ color:var(--gold); }
+
+  /* ---------- Before/After ---------- */
+  .compare{ margin-top:20px; border-radius:16px; overflow:hidden; border:1px solid #e7e2da; }
+  .compare-row{ display:flex; }
+  .compare-col{ flex:1; padding:18px 14px; font-size:13px; line-height:1.5; }
+  .compare-col.before{ background:#fff0ee; color:#7a2e24; }
+  .compare-col.after{ background:#e8f7f2; color:#0e5245; }
+  .compare-head{
+    font-weight:800; font-size:13px; text-transform:uppercase; letter-spacing:.04em;
+    margin-bottom:10px; display:flex; align-items:center; gap:6px;
+  }
+  .compare-col ul{ list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .compare-col li{ display:flex; gap:6px; align-items:flex-start; }
+
+  /* ---------- Video demo box ---------- */
+  .video-box{
+    background:var(--ink);
+    border:2px solid var(--teal-bright);
+    border-radius:18px;
+    padding:20px; margin-top:22px;
+    box-shadow:0 12px 30px -10px rgba(0,0,0,.5);
+  }
+  .video-box .vlabel{
+    display:flex; align-items:center; gap:8px;
+    font-size:14px; font-weight:800; color:var(--teal-bright);
+    margin-bottom:8px;
+  }
+  .video-box .vdesc{
+    font-size:12.5px; line-height:1.55; color:rgba(255,255,255,.75);
+    margin-bottom:14px;
+  }
+  .video-thumb{
+    position:relative; display:block; border-radius:12px; overflow:hidden;
+    border:2px solid var(--teal-bright);
+    aspect-ratio:16/9;
+    background:radial-gradient(circle at 50% 45%, #2a2a2a, #0a0a0a 75%);
+    text-decoration:none;
+  }
+  .video-thumb .badge-tool{
+    position:absolute; top:12px; right:12px;
+    background:rgba(0,0,0,.55); border:1px solid var(--teal-bright);
+    color:var(--teal-bright); font-size:10.5px; font-weight:800;
+    padding:5px 9px; border-radius:8px; text-align:right; line-height:1.3;
+  }
+  .video-thumb .play-wrap{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  }
+  .play-ring{
+    width:58px; height:58px; border-radius:50%;
+    background:var(--teal-bright);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 0 0 8px rgba(255,255,255,.08);
+  }
+  .play-ring::after{
+    content:"";
+    border-style:solid; border-width:9px 0 9px 15px;
+    border-color:transparent transparent transparent var(--ink);
+    margin-left:3px;
+  }
+  .video-cta{
+    text-align:center; font-size:12.5px; font-weight:700;
+    color:#fff; margin-top:12px;
+  }
+
+  /* ---------- Feature capture gallery ---------- */
+  .capture-scroll{
+    display:flex; gap:14px; overflow-x:auto; padding:20px 24px 10px;
+    scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+  }
+  .capture-scroll::-webkit-scrollbar{ display:none; }
+  .capture-card{
+    flex:0 0 76%; scroll-snap-align:start;
+    background:#fff; border:1px solid #e2ddd2; border-radius:16px;
+    overflow:hidden; box-shadow:0 8px 20px -10px rgba(0,0,0,.25);
+  }
+  .capture-img-wrap{
+    position:relative; width:100%; aspect-ratio:4/3; overflow:hidden;
+    background:#f0efe9;
+  }
+  .capture-img-wrap img{
+    width:100%; height:100%; object-fit:cover; object-position:top center;
+    display:block;
+  }
+  .capture-pill{
+    position:absolute; top:10px; left:10px;
+    background:var(--ink); color:#fff;
+    font-size:10.5px; font-weight:800; letter-spacing:.03em;
+    padding:5px 10px; border-radius:99px;
+  }
+  .capture-body{ padding:14px 16px 16px; }
+  .capture-body .cname{
+    font-size:14.5px; font-weight:800; color:var(--ink); margin-bottom:3px;
+  }
+  .capture-body .cdesc{ font-size:12px; color:#6b6b6b; line-height:1.4; }
+  .capture-hint{
+    text-align:center; font-size:11.5px; color:#8a8a8a; margin-top:2px;
+  }
+
+  /* ---------- Included list ---------- */
+  .included{ margin-top:18px; display:flex; flex-direction:column; gap:2px; }
+  .inc-item{
+    display:flex; gap:12px; padding:14px 4px;
+    border-bottom:1px solid #e2ddd2;
+  }
+  .inc-item:last-child{ border-bottom:none; }
+  .inc-check{
+    width:22px; height:22px; border-radius:50%;
+    background:var(--teal-bright); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:800; flex-shrink:0; margin-top:1px;
+  }
+  .inc-item.gift .inc-check{ background:var(--gold); color:var(--ink); }
+  .inc-title{ font-size:14px; font-weight:700; color:var(--ink); margin-bottom:2px; }
+  .inc-sub{ font-size:12.5px; color:#5c5c5c; line-height:1.4; }
+
+  /* ---------- Free strip ---------- */
+  .free-box{
+    background:linear-gradient(120deg, var(--teal-deep), var(--teal-bright));
+    color:#fff; border-radius:16px; padding:22px; margin-top:22px;
+  }
+  .free-box .flabel{
+    font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:6px;
+  }
+  .free-box h3{ font-family:var(--font-display); font-size:19px; margin-bottom:8px; }
+  .free-box p{ font-size:13px; line-height:1.55; color:rgba(255,255,255,.9); margin-bottom:10px;}
+  .free-chips{ display:flex; flex-wrap:wrap; gap:8px; }
+  .free-chips span{
+    background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.3);
+    font-size:11.5px; padding:6px 10px; border-radius:99px;
+  }
+
+  /* ---------- Devices ---------- */
+  .devices{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:18px; }
+  .device{
+    background:#fff; border:1px solid #e7e2da; border-radius:14px;
+    padding:16px 8px; text-align:center;
+  }
+  .device .ico{ font-size:26px; margin-bottom:8px; }
+  .device .dname{ font-size:12.5px; font-weight:700; color:var(--ink); }
+  .device .dos{ font-size:10.5px; color:#7a7a7a; margin:2px 0 8px; }
+  .device .ok{
+    display:inline-block; font-size:11px; font-weight:700;
+    color:#0e5245; background:#e2f5ee; padding:3px 8px; border-radius:99px;
+  }
+  .web-note{
+    text-align:center; font-size:12.5px; color:#5c5c5c; margin-top:16px; line-height:1.5;
+  }
+
+  /* ---------- Final CTA ---------- */
+  .final{
+    background:var(--ink); color:#fff; text-align:center;
+    padding:44px 24px 52px;
+  }
+  .final .kicker{ color:var(--gold); }
+  .final h2{ color:#fff; }
+  .final p.lede{ color:rgba(255,255,255,.78); }
+  .final .price-card{ background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.2); margin-top:22px;}
+
+  /* ---------- Sticky CTA ---------- */
+  .sticky-cta{
+    position:sticky; bottom:0; left:0; right:0;
+    background:#fff; border-top:1px solid #e2ddd2;
+    padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+    z-index:50;
+    box-shadow:0 -6px 18px -6px rgba(0,0,0,.12);
+  }
+  .sticky-inner{ display:flex; align-items:center; gap:12px; max-width:520px; margin:0 auto; }
+  .sticky-price{ flex-shrink:0; }
+  .sticky-price .old{ font-size:10.5px; color:#9a9a9a; text-decoration:line-through; }
+  .sticky-price .new{ font-size:16px; font-weight:800; color:var(--teal-deep); }
+  .sticky-cta a.cta-btn{ padding:13px 14px; font-size:14px; }
+
+  footer{
+    text-align:center; padding:20px 24px 90px; font-size:11px; color:#9a9a9a;
+    background:var(--mist);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">⏳ PROMO BERAKHIR MINGGU INI — HARGA NAIK SETELAHNYA</div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <span class="eyebrow">📸 Studio Foto AI #1 Indonesia</span>
+    <h1>Studio Foto Profesional & Konten Viral, <em>Langsung dari HP</em></h1>
+    <p class="sub">Wedding · Newborn · World Cup · Try-On · Affiliate · Video AI — 90+ fitur AI dalam satu aplikasi. Cukup sekali bayar, pakai selamanya.</p>
+    <p class="tagline">🇮🇩 Foto Studio AI + Konten Kreator #1 Indonesia</p>
+
+    <div class="price-card">
+      <div>
+        <span class="price-old">IDR 350.000</span>
+        <span class="price-new">Rp130.000</span>
+        <span class="price-tag">Lifetime — sekali bayar</span>
+      </div>
+      <div class="badge-off">-63%</div>
+    </div>
+
+    <a class="cta-btn" href="http://lynk.id/duniadigitalkita/o51ok5x57kxx/checkout">Ambil Promo Sekarang</a>
+    <p class="cta-note">Semua fitur generate 100% gratis · Tanpa API Key</p>
+  </header>
+
+  <!-- PAIN POINTS -->
+  <section>
+    <div class="kicker">Sering merasa begini?</div>
+    <h2>😩 Apakah Ini Yang Anda Rasakan?</h2>
+    <p class="lede">Lelah keluar budget jutaan untuk sekali sesi foto studio? Atau stuck jadi konten kreator karena kehabisan ide dan tidak bisa edit video?</p>
+    <div class="pain-list">
+      <div class="pain-item"><span class="x">✗</span> Bayar jutaan untuk sesi foto wedding/newborn yang cuma sekali pakai</div>
+      <div class="pain-item"><span class="x">✗</span> Ribet atur jadwal fotografer & menunggu hasil edit yang lama</div>
+      <div class="pain-item"><span class="x">✗</span> Stuck bikin konten — tidak bisa edit video, kehabisan ide promosi</div>
+      <div class="pain-item"><span class="x">✗</span> Audiens bosan, penjualan affiliate jalan di tempat</div>
+    </div>
+    <a class="cta-btn small" style="margin-top:22px;" href="http://lynk.id/duniadigitalkita/o51ok5x57kxx/checkout">Sudah Yakin? Ambil Sekarang — Rp130.000</a>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="section-mist">
+    <div class="kicker">Solusi cerdas untuk Anda</div>
+    <h2>Affiliate Go Foto Studio 📸</h2>
+    <p class="lede">Mengubah smartphone Anda jadi studio foto profesional & asisten konten pribadi. Tidak perlu skill editing rumit atau peralatan mahal — AI tercanggih bekerja otomatis dalam hitungan detik.</p>
+    <p class="lede" style="font-weight:700; color:var(--ink);">Upload foto biasa → AI menyulap jadi foto profesional → konten viral siap tayang 💰</p>
+
+    <div class="stats">
+      <div class="stat"><div class="num">90%</div><div class="lbl">Lebih hemat vs studio</div></div>
+      <div class="stat"><div class="num">Detik</div><div class="lbl">Hasil foto langsung jadi</div></div>
+      <div class="stat"><div class="num">Lifetime</div><div class="lbl">Sekali bayar selamanya</div></div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section>
+    <div class="eyebrow" style="background:var(--ink); border-color:var(--ink); color:#fff; margin-bottom:14px;">⚡ 90+ TOOLS MAHAL JADI 1 APLIKASI</div>
+    <h2>3 Fitur Unggulan Yang Anda Dapat</h2>
+
+    <div class="feature f1">
+      <div class="ftag">📸 01 · Studio Foto</div>
+      <h3>Studio Foto AI Profesional</h3>
+      <div class="sub-items">Wedding · Newborn · Profil · Food Selfie</div>
+      <p>Hemat biaya studio hingga jutaan rupiah. Upload foto biasa — AI menyulapnya jadi foto pre-wedding estetis, foto bayi baru lahir yang lucu, foto profil bisnis, hingga katalog makanan yang menggiurkan.</p>
+      <div class="result">→ Hasil setara foto studio jutaan — dalam hitungan detik!</div>
+    </div>
+
+    <div class="feature f2">
+      <div class="ftag">🚀 02 · Konten & Affiliate</div>
+      <h3>Affiliate Go & Content Generator</h3>
+      <div class="sub-items">Story IG · Video Generator · Voice Over AI</div>
+      <p>Tidak pernah kehabisan ide konten lagi. Buat materi promosi affiliate yang menarik secara otomatis, lengkap dengan video generator dan pengisi suara AI agar jualan makin laris.</p>
+      <div class="result">→ Konten promosi profesional tanpa skill editing sama sekali!</div>
+    </div>
+
+    <div class="feature f3">
+      <div class="ftag">✨ 03 · Viral & Kreatif</div>
+      <h3>Fitur Kreatif & Viral</h3>
+      <div class="sub-items">Halu Idol · Miniature Me · Sticker Hair</div>
+      <p>Tingkatkan engagement media sosial dengan konten unik. Foto bareng idola, versi miniatur diri, atau eksperimen gaya rambut lucu yang berpotensi viral di TikTok & Instagram.</p>
+      <div class="result">→ Konten viral yang bikin followers ketagihan follow!</div>
+    </div>
+
+    <div class="new-banner">🎁 <b>BONUS:</b> Fitur baru terus ditambahkan secara berkala — tanpa biaya tambahan selamanya!</div>
+  </section>
+
+  <!-- NEW FEATURES -->
+  <section class="section-mist">
+    <div class="kicker">🆕 Baru ditambahkan</div>
+    <h2>Fitur Terbaru — Terus Bertambah!</h2>
+    <p class="lede">Aplikasi terus berkembang. Sekarang sudah 90+ fitur AI dalam 1 aplikasi — dan ini yang paling baru:</p>
+
+    <div class="feature" style="margin-top:16px;">
+      <h3>🏆 Foto World Cup — Lagi Musim</h3>
+      <p>Upload fotomu, ketik negara — jadilah bagian dari Piala Dunia: suporter di stadion, jadi pemain di lapangan, sampai angkat trophy juara. Banyak tema, tiap hasil beda angle.</p>
+      <div class="result">→ Konten musiman yang gampang viral di TikTok & IG!</div>
+    </div>
+
+    <div class="feature">
+      <h3>🎙️ Studio Podcast · 👕 Virtual Try-On</h3>
+      <p>Foto seolah lagi siaran podcast profesional, atau coba pakai produk/baju secara virtual untuk jualan affiliate. Plus puluhan tools lain yang terus bertambah — semua sudah termasuk, tanpa biaya tambahan selamanya.</p>
+    </div>
+  </section>
+
+  <!-- BEFORE / AFTER -->
+  <section>
+    <div class="kicker">Transformasi nyata</div>
+    <h2>🔄 Setelah Pakai Affiliate Go</h2>
+    <div class="compare">
+      <div class="compare-row">
+        <div class="compare-col before">
+          <div class="compare-head">❌ Sebelum</div>
+          <ul>
+            <li>💸 Bayar Rp3 juta+ untuk sesi foto sekali pakai</li>
+            <li>⏳ Nunggu edit foto berhari-hari</li>
+            <li>😴 Kehabisan ide konten, engagement sepi</li>
+            <li>🧾 Bayar jasa edit konten tiap project</li>
+          </ul>
+        </div>
+        <div class="compare-col after">
+          <div class="compare-head">✅ Sesudah</div>
+          <ul>
+            <li>🎉 Rp130.000 sekali — pakai selamanya!</li>
+            <li>⚡ Hasil foto jadi dalam hitungan detik</li>
+            <li>🔥 Ide konten tak pernah habis, viral terus</li>
+            <li>🤖 Semua otomatis — tanpa skill editing!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO DEMO -->
+  <section class="section-mist">
+    <div class="video-box">
+      <div class="vlabel">🎬 Lihat Langsung Hasilnya</div>
+      <div class="vdesc">Tonton demo — lihat sendiri bagaimana foto biasa berubah jadi foto studio profesional:</div>
+      <a class="video-thumb" href="https://www.youtube.com/watch?v=nJqyB45Jhxw" target="_blank" rel="noopener">
+        <div class="badge-tool">ONE TOOL<br>90 FEATURES</div>
+        <div class="play-wrap"><div class="play-ring"></div></div>
+      </a>
+      <div class="video-cta">▶ Klik untuk tonton demo di YouTube</div>
+    </div>
+  </section>
+
+  <!-- CAPTURE GALLERY -->
+  <section class="section-mist" style="padding-left:0; padding-right:0;">
+    <div style="padding:0 24px;">
+      <div class="kicker">📷 Bukti nyata dari aplikasi</div>
+      <h2>Capture Langsung Hasil Fitur</h2>
+      <p class="lede">Ini tampilan asli dari dalam aplikasi — upload foto biasa, AI proses dalam hitungan detik:</p>
+    </div>
+    <div class="capture-scroll">
+      <div class="capture-card">
+        <div class="capture-img-wrap"><img src="assets/f_podcast.png" alt="Studio Podcast AI"><div class="capture-pill">Studio Podcast</div></div>
+        <div class="capture-body"><div class="cname">🎙️ Studio Podcast</div><div class="cdesc">Selfie biasa jadi visual siaran podcast profesional lengkap studio & pencahayaan.</div></div>
+      </div>
+      <div class="capture-card">
+        <div class="capture-img-wrap"><img src="assets/f_karikatur1.png" alt="Karikatur Generator"><div class="capture-pill">Karikatur Generator</div></div>
+        <div class="capture-body"><div class="cname">🎨 Karikatur Generator</div><div class="cdesc">Foto formal disulap jadi karikatur lucu dengan banyak pilihan gaya.</div></div>
+      </div>
+      <div class="capture-card">
+        <div class="capture-img-wrap"><img src="assets/f_headshot.png" alt="Professional Headshot Studio"><div class="capture-pill">Headshot Studio</div></div>
+        <div class="capture-body"><div class="cname">💼 Professional Headshot</div><div class="cdesc">Foto seadanya jadi headshot LinkedIn & profil bisnis kelas profesional.</div></div>
+      </div>
+      <div class="capture-card">
+        <div class="capture-img-wrap"><img src="assets/f_ultah.png" alt="Foto Ulang Tahun AI"><div class="capture-pill">Foto Ulang Tahun</div></div>
+        <div class="capture-body"><div class="cname">🎂 Foto Ulang Tahun</div><div class="cdesc">Satu foto anak jadi rangkaian foto ulang tahun penuh warna & balon.</div></div>
+      </div>
+      <div class="capture-card">
+        <div class="capture-img-wrap"><img src="assets/f_umrah.png" alt="Foto Umrah Haji AI"><div class="capture-pill">Foto Umrah/Haji</div></div>
+        <div class="capture-body"><div class="cname">🕋 Foto Umrah/Haji</div><div class="cdesc">Foto casual berubah jadi momen ibadah di depan Ka'bah — realistis.</div></div>
+      </div>
+      <div class="capture-card">
+        <div class="capture-img-wrap"><img src="assets/f_wisuda.png" alt="Professional Graduation Photo"><div class="capture-pill">Foto Wisuda</div></div>
+        <div class="capture-body"><div class="cname">🎓 Graduation Photo</div><div class="cdesc">Foto biasa jadi foto wisuda profesional lengkap toga & lokasi kampus.</div></div>
+      </div>
+      <div class="capture-card">
+        <div class="capture-img-wrap"><img src="assets/f_newborn.png" alt="Newborn Baby Photo AI"><div class="capture-pill">Newborn Baby</div></div>
+        <div class="capture-body"><div class="cname">👶 Newborn Photoshoot</div><div class="cdesc">Foto bayi apa adanya jadi photoshoot newborn bertema, tanpa sesi studio.</div></div>
+      </div>
+      <div class="capture-card">
+        <div class="capture-img-wrap"><img src="assets/f_makanan.png" alt="Foto Makanan Profesional"><div class="capture-pill">Foto Makanan</div></div>
+        <div class="capture-body"><div class="cname">🍽️ Foto Makanan Profesional</div><div class="cdesc">Jepretan HP jadi foto katalog makanan siap pakai untuk promosi.</div></div>
+      </div>
+    </div>
+    <div class="capture-hint">← geser untuk lihat fitur lainnya →</div>
+  </section>
+
+  <!-- WHAT'S INCLUDED -->
+  <section class="section-mist">
+    <div class="kicker">📦 Semua yang Anda dapat</div>
+    <h2>Rincian Paket Lifetime</h2>
+    <div class="included">
+      <div class="inc-item"><div class="inc-check">✓</div><div><div class="inc-title">Lifetime Access — Semua Fitur Saat Ini & Mendatang</div><div class="inc-sub">Akses seumur hidup tanpa biaya tersembunyi apapun</div></div></div>
+      <div class="inc-item"><div class="inc-check">✓</div><div><div class="inc-title">Studio Foto AI (Wedding, Newborn, Profil, Food)</div><div class="inc-sub">Hasil setara foto studio profesional dalam detik</div></div></div>
+      <div class="inc-item"><div class="inc-check">✓</div><div><div class="inc-title">Affiliate Go & Content Generator</div><div class="inc-sub">Story IG, Video Generator, Voice Over AI — siap pakai</div></div></div>
+      <div class="inc-item"><div class="inc-check">✓</div><div><div class="inc-title">Fitur Viral: Halu Idol, Miniature Me, Sticker Hair</div><div class="inc-sub">Konten unik yang berpotensi viral di media sosial</div></div></div>
+      <div class="inc-item gift"><div class="inc-check">🎁</div><div><div class="inc-title">Update Fitur Baru Selamanya — Gratis!</div><div class="inc-sub">Fitur baru terus ditambahkan tanpa biaya tambahan</div></div></div>
+    </div>
+
+    <div class="free-box">
+      <div class="flabel">Semua generate 100% gratis</div>
+      <h3>Tidak perlu API Key apapun!</h3>
+      <p>Tidak perlu API Key, tidak perlu akun tambahan, tidak ada biaya tersembunyi. Semua fitur generate foto, video, voice over, dan konten tersedia langsung — cukup login dan langsung pakai!</p>
+      <div class="free-chips">
+        <span>✅ Generate foto AI</span>
+        <span>✅ Buat video</span>
+        <span>✅ Voice over</span>
+        <span>✅ Konten affiliate</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEVICES -->
+  <section>
+    <div class="kicker">📱 Semua perangkat</div>
+    <h2>Bisa Digunakan di HP · Tablet · Laptop · PC</h2>
+    <div class="devices">
+      <div class="device"><div class="ico">📱</div><div class="dname">HP / Tablet</div><div class="dos">Android & iOS</div><div class="ok">✅ Bisa</div></div>
+      <div class="device"><div class="ico">💻</div><div class="dname">Laptop</div><div class="dos">Windows & Mac</div><div class="ok">✅ Bisa</div></div>
+      <div class="device"><div class="ico">🖥️</div><div class="dname">PC Desktop</div><div class="dos">Semua OS</div><div class="ok">✅ Bisa</div></div>
+    </div>
+    <p class="web-note">🌐 Berbasis web — tidak perlu install software apapun. Buka browser, langsung pakai!</p>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final">
+    <div class="kicker">⏳ Promo hanya berlaku minggu ini</div>
+    <h2>Jangan Tunggu Harga Naik Lagi</h2>
+    <p class="lede">Miliki 90+ fitur studio foto AI & konten kreator, sekali bayar untuk selamanya.</p>
+    <div class="price-card">
+      <div>
+        <span class="price-old">IDR 350.000</span>
+        <span class="price-new">Rp130.000</span>
+        <span class="price-tag">Lifetime — sekali bayar</span>
+      </div>
+      <div class="badge-off">-63%</div>
+    </div>
+    <a class="cta-btn" href="http://lynk.id/duniadigitalkita/o51ok5x57kxx/checkout">Ambil Promo Sekarang</a>
+    <p class="cta-note">Pembayaran aman lewat Lynk.id</p>
+  </section>
+
+  <section class="section-mist" style="padding-top:32px; padding-bottom:32px;">
+    <div class="kicker">⚠️ Syarat & Ketentuan</div>
+    <div class="pain-list">
+      <div class="pain-item" style="border-left-color:var(--teal-mid);">Semua fitur generate menggunakan teknologi AI — hasil dapat bervariasi tergantung foto input.</div>
+      <div class="pain-item" style="border-left-color:var(--teal-mid);">Aplikasi menampilkan iklan sebagai biaya maintenance. Opsi bebas iklan tersedia di dalam aplikasi.</div>
+      <div class="pain-item" style="border-left-color:var(--teal-mid);">Fokus aplikasi ini adalah generate FOTO dengan AI. Untuk fitur image-to-video (mengubah foto jadi video) pada paket gratis menggunakan Meta AI dan Grok AI.</div>
+      <div class="pain-item" style="border-left-color:var(--teal-mid);">Dengan melakukan pembelian, Anda dinyatakan telah membaca dan menyetujui seluruh syarat & ketentuan yang berlaku.</div>
+    </div>
+    <p class="web-note" style="margin-top:16px;">📋 Membeli berarti sudah baca dan setuju dengan seluruh ketentuan penggunaan Affiliate Go Foto Studio.</p>
+  </section>
+
+  <footer>© Affiliate Go Foto Studio. Semua merek dagang milik pemiliknya masing-masing.</footer>
+
+  <!-- STICKY CTA -->
+  <div class="sticky-cta">
+    <div class="sticky-inner">
+      <div class="sticky-price"><span class="old">Rp350.000</span><br><span class="new">Rp130.000</span></div>
+      <a class="cta-btn" style="flex:1;" href="http://lynk.id/duniadigitalkita/o51ok5x57kxx/checkout">Ambil Promo Sekarang</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
