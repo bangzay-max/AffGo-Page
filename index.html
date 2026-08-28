@@ -6,14 +6,14 @@
 <title>Affiliate Go Foto Studio — Studio Foto AI #1 Indonesia</title>
 <style>
   :root{
-    --ink:#320A6B;
-    --teal-deep:#0A5089;
-    --teal-mid:#0F828C;
-    --teal-bright:#78B9B5;
+    --ink:#000000;
+    --teal-deep:#3D0000;
+    --teal-mid:#950101;
+    --teal-bright:#FF0000;
     --mist:#F3F3F3;
     --paper:#FCFCFB;
     --gold:#FFD400;
-    --coral:#0A5089;
+    --coral:#950101;
     --font-display: 'Fraunces', 'Georgia', serif;
     --font-body: 'Inter', system-ui, -apple-system, sans-serif;
   }
@@ -44,18 +44,29 @@
 
   /* ---------- Hero ---------- */
   .hero{
-    background:linear-gradient(165deg, var(--teal-deep) 0%, var(--teal-mid) 55%, var(--teal-bright) 100%);
+    background:#000;
     color:#fff;
     padding:38px 24px 46px;
     position:relative;
     overflow:hidden;
   }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 380px 260px at 15% -5%, rgba(255,0,0,.35), transparent 60%),
+      radial-gradient(ellipse 320px 240px at 90% 10%, rgba(149,1,1,.4), transparent 65%),
+      radial-gradient(ellipse 300px 200px at 50% 105%, rgba(255,60,0,.22), transparent 70%);
+    filter:blur(10px);
+    pointer-events:none;
+  }
   .hero::after{
     content:"";
     position:absolute; right:-60px; top:-60px;
     width:220px; height:220px; border-radius:50%;
-    background:radial-gradient(circle, rgba(255,255,255,.14), transparent 70%);
+    background:radial-gradient(circle, rgba(255,0,0,.25), transparent 70%);
   }
+  .hero > *{ position:relative; z-index:1; }
   .eyebrow{
     display:inline-flex; align-items:center; gap:6px;
     background:rgba(255,255,255,.14);
@@ -66,17 +77,23 @@
   }
   h1{
     font-family:var(--font-display);
-    font-size:clamp(28px,8vw,36px);
-    line-height:1.12;
+    font-size:clamp(30px,8.5vw,38px);
+    line-height:1.1;
     font-weight:800;
-    letter-spacing:-.01em;
-    margin-bottom:14px;
+    letter-spacing:-.015em;
+    margin-bottom:16px;
+    text-shadow:0 2px 20px rgba(0,0,0,.4);
   }
-  h1 em{ font-style:normal; color:var(--gold); }
+  h1 em{
+    font-style:normal;
+    background:linear-gradient(90deg, #FFD400, #FF0000);
+    -webkit-background-clip:text; background-clip:text;
+    -webkit-text-fill-color:transparent; color:var(--gold);
+  }
   .hero p.sub{
     font-size:15.5px;
-    line-height:1.55;
-    color:rgba(255,255,255,.88);
+    line-height:1.6;
+    color:rgba(255,255,255,.68);
     max-width:44ch;
     margin-bottom:22px;
   }
@@ -117,7 +134,7 @@
 
   .cta-btn{
     display:block; width:100%; text-align:center;
-    background:linear-gradient(135deg, #0F828C, #320A6B);
+    background:linear-gradient(135deg, #FF0000, #950101);
     color:#fff;
     font-weight:800; font-size:16px;
     padding:17px 20px; border-radius:14px;
@@ -202,7 +219,7 @@
   .feature .result{
     display:block; text-align:center;
     font-size:13px; font-weight:800; color:#fff;
-    background:linear-gradient(135deg, #0F828C, #320A6B);
+    background:linear-gradient(135deg, #FF0000, #950101);
     border:2px solid var(--ink); border-radius:12px;
     padding:11px 14px;
   }
